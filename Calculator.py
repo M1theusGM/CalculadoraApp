@@ -16,6 +16,8 @@ app.geometry('405x583+700+200')
 
 app.resizable(width=False, height=False)
 
+CTk._set_appearance_mode(app,'dark')
+
 app.iconbitmap('CalculadoraApp/Imagens/Calculator.ico')
 
 ######################################
@@ -24,6 +26,18 @@ app.iconbitmap('CalculadoraApp/Imagens/Calculator.ico')
 ######################################
 
             # Elementos
+
+label_resultados = CTkLabel(app,
+                            width = 398,
+                            height = 10,
+                            text = '12345',
+                            font = ('arial bold', 45),
+                            fg_color = '#242424',
+                            anchor = E,
+                            text_color = '#eaebea')
+label_resultados.place(x = 4, y = 85)
+
+
             
 botão_0 = CTkButton(app,
                     text = '0',
@@ -31,7 +45,10 @@ botão_0 = CTkButton(app,
                     command = valor_botao_0,
                     width = 198,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424'
+                    )
 
 botão_1 = CTkButton(app,
                     text = '1',
@@ -39,7 +56,9 @@ botão_1 = CTkButton(app,
                     command = valor_botao_1,
                     width = 98,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 botão_2 = CTkButton(app,
                     text = '2',
@@ -47,7 +66,9 @@ botão_2 = CTkButton(app,
                     command = valor_botao_2,
                     width = 98,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 botão_3 = CTkButton(app,
                     text = '3',
@@ -55,7 +76,9 @@ botão_3 = CTkButton(app,
                     command = valor_botao_3,
                     width = 98,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 botão_4 = CTkButton(app,
                     text = '4',
@@ -63,7 +86,9 @@ botão_4 = CTkButton(app,
                     command = valor_botao_4,
                     width = 98,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 botão_5 = CTkButton(app,
                     text = '5',
@@ -71,7 +96,9 @@ botão_5 = CTkButton(app,
                     command = valor_botao_5,
                     width = 98,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 botão_6 = CTkButton(app,
                     text = '6',
@@ -79,7 +106,9 @@ botão_6 = CTkButton(app,
                     command = valor_botao_6,
                     width = 98,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 botão_7 = CTkButton(app,
                     text = '7',
@@ -87,7 +116,9 @@ botão_7 = CTkButton(app,
                     command = valor_botao_7,
                     width = 98,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 botão_8 = CTkButton(app,
                     text = '8',
@@ -95,7 +126,9 @@ botão_8 = CTkButton(app,
                     command = valor_botao_8,
                     width = 98,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 botão_9 = CTkButton(app,
                     text = '9',
@@ -103,7 +136,9 @@ botão_9 = CTkButton(app,
                     command = valor_botao_9,
                     width = 98,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 botão_virgula = CTkButton(app,
                     text = '.',
@@ -111,7 +146,9 @@ botão_virgula = CTkButton(app,
                     command = virgula,
                     width = 98,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 botão_resultado = CTkButton(app,
                     text = '=',
@@ -119,7 +156,9 @@ botão_resultado = CTkButton(app,
                     command = igual,
                     width = 98,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 botão_soma = CTkButton(app,
                     text = '+',
@@ -127,7 +166,9 @@ botão_soma = CTkButton(app,
                     command = soma,
                     width = 98,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 botão_subtra = CTkButton(app,
                     text = '-',
@@ -135,7 +176,9 @@ botão_subtra = CTkButton(app,
                     command = subtra,
                     width = 98,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 botão_multipli = CTkButton(app,
                     text = 'x',
@@ -143,7 +186,9 @@ botão_multipli = CTkButton(app,
                     command = multipli,
                     width = 98,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 botão_divisao = CTkButton(app,
                     text = '÷',
@@ -151,7 +196,9 @@ botão_divisao = CTkButton(app,
                     command = divisao,
                     width = 98,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 botão_limpar = CTkButton(app,
                     text = 'CE',
@@ -159,7 +206,9 @@ botão_limpar = CTkButton(app,
                     command = limpar,
                     width = 298,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 botão_ao_quadrado = CTkButton(app,
                     text = 'x²',
@@ -167,7 +216,9 @@ botão_ao_quadrado = CTkButton(app,
                     command = ao_quadrado,
                     width = 198,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 botão_raiz_quadrada = CTkButton(app,
                     text = '²√x',
@@ -175,7 +226,9 @@ botão_raiz_quadrada = CTkButton(app,
                     command = raiz_quadrada,
                     width = 98,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 botão_limpar_um_por_um = CTkButton(app,
                     text = '⌫',
@@ -183,7 +236,9 @@ botão_limpar_um_por_um = CTkButton(app,
                     command = limpar_um_por_um,
                     width = 98,
                     height = 60,
-                    font = ('arial bold',20))
+                    font = ('arial bold',20),
+                    corner_radius = 5,
+                    bg_color = '#242424')
 
 
 
