@@ -1,6 +1,6 @@
 from tkinter import *
 from customtkinter import *
-from funcionalidades import *
+from numpy import sqrt
 
 #####################################
 
@@ -18,13 +18,34 @@ CTk._set_appearance_mode(app,'dark')
 
 app.iconbitmap('CalculadoraApp/Imagens/Calculator.ico')
 
+
 #####################################
              # Funções 
 
-posição = 0
-equação = ''
-resultado = StringVar(value="")
-            
+def calcular_ao_quadrado():
+        valor = label_resultados.get()  
+        valor = int(valor)
+        calculo = valor ** 2
+        resultado.set(calculo)
+
+def calcular_raiz_quadrada():
+        valor = label_resultados.get()
+        
+        valor_inteiro = int(valor)
+
+        raiz = sqrt(valor_inteiro)
+        raiz_valor_str = str(raiz)
+        procurar_ponto = raiz_valor_str.find('.')
+
+        if '.0' in raiz_valor_str:
+
+                str_raiz_atualizada = raiz_valor_str[:procurar_ponto] 
+                resultado.set(int(str_raiz_atualizada))
+
+        else:
+                resultado.set(float(raiz_valor_str))
+
+
 def mostrar_valores(valor):
         global posição
         global equação
@@ -32,7 +53,18 @@ def mostrar_valores(valor):
         
         label_resultados.insert(posição,valor)
         posição += 1
-        
+       
+# função para limpar o conteúdo digitado na caixa de texto
+def limpar_conteudo():
+  
+  # limpamos o conteúdo da caixa de texto Entry
+  nova_string = label_resultados.get()
+  nova_string = nova_string[:-1]
+  text_atualizado = nova_string
+  
+  label_resultados.delete(0, END)
+  label_resultados.insert(0,text_atualizado)
+
 def limpar_tudo():
         label_resultados.delete(0,END)
 
@@ -68,19 +100,34 @@ def calcular_resultado():
         resultado_value = lista_expressoes[0]
         # Percorre a lista na ordem em que os itens foram inseridos e realiza o cálculo
         for i in range(1, len(lista_expressoes), 2):
-            operator = lista_expressoes[i]
-            operand = lista_expressoes[i+1]
-            if operator == "+":
-                resultado_value += operand
-            elif operator == "-":
-                resultado_value -= operand
-            elif operator == "*":
-                resultado_value *= operand
-            elif operator == "/":
-                resultado_value /= operand
-        # Define o resultadoado como uma string e atualiza a variável de controle (StringVar) 'resultado'
+            operador = lista_expressoes[i]
+            operando = lista_expressoes[i+1]
+            if operador == "+":
+                resultado_value += operando
+            elif operador == "-":
+                resultado_value -= operando
+            elif operador == "*":
+                resultado_value *= operando
+            elif operador == "/":
+                resultado_value /= operando
+        # Define o resultado como uma string e atualiza a variável de controle (StringVar) 'resultado'
         resultado.set("{:.0f}".format(resultado_value) if resultado_value.is_integer() else "{:.1f}".format(resultado_value))
-        
+
+def validacao_valores(valor):
+    valores_permitidos = "0123456789+-*/."
+    for caracter in valor:
+        if caracter not in valores_permitidos:
+            return False
+    return True
+
+######################################
+        # variaveis
+
+validacao = app.register(validacao_valores)
+posição = 0
+equação = ''
+resultado = StringVar(value="")
+
 ######################################
 
 ######################################
@@ -96,6 +143,8 @@ label_resultados = CTkEntry(app,
                             border_color = '#242424',
                             text_color = '#eaebea',
                             corner_radius = -1,
+                            validatecommand=(validacao, '%P'),
+                            validate="key",
                             textvariable = resultado)
 
 botão_0 = CTkButton(app,
@@ -271,7 +320,7 @@ botão_limpar = CTkButton(app,
 botão_ao_quadrado = CTkButton(app,
                     text = 'x²',
                     fg_color = '#FE8100',
-                    command = ao_quadrado,
+                    command = lambda: calcular_ao_quadrado(),
                     width = 198,
                     height = 60,
                     font = ('arial bold',20),
@@ -281,7 +330,7 @@ botão_ao_quadrado = CTkButton(app,
 botão_raiz_quadrada = CTkButton(app,
                     text = '²√x',
                     fg_color = '#FE8100',
-                    command = raiz_quadrada,
+                    command = lambda: calcular_raiz_quadrada(),
                     width = 98,
                     height = 60,
                     font = ('arial bold',20),
@@ -291,7 +340,7 @@ botão_raiz_quadrada = CTkButton(app,
 botão_limpar_um_por_um = CTkButton(app,
                     text = '⌫',
                     fg_color = '#FE8100',
-                    command = limpar_um_por_um,
+                    command = lambda: limpar_conteudo(),
                     width = 98,
                     height = 60,
                     font = ('arial bold',20),
@@ -358,7 +407,6 @@ botão_limpar_um_por_um.place(x = 304, y = 204)
 ##########################################
         # Precionar Botões Pelo Teclado
 
-
 # numeros vinculados ao teclado
 app.bind('0',lambda event:mostrar_valores('0'))
 app.bind('1', lambda event: mostrar_valores('1'))
@@ -374,11 +422,34 @@ app.bind('9', lambda event: mostrar_valores('9'))
 
 app.bind('.',lambda event: mostrar_valores('.'))
 app.bind('<Return>',lambda event: calcular_resultado())
+app.bind('<BackSpace>', lambda event: limpar_conteudo())
 
 #expressoes
 app.bind('+', lambda event: mostrar_valores('+'))
 app.bind('-', lambda event: mostrar_valores('-'))
 app.bind('/', lambda event: mostrar_valores('/'))
 app.bind('*', lambda event: mostrar_valores('*'))
+
+# desliga os binds se a entry estiver selecionada
+def desativar_binds(event):
+        app.unbind('0')
+        app.unbind('1')
+        app.unbind('2')
+        app.unbind('3')
+        app.unbind('4')
+        app.unbind('5')
+        app.unbind('6')
+        app.unbind('7')
+        app.unbind('8')
+        app.unbind('9')
+        app.unbind('.')
+        app.unbind('+')
+        app.unbind('-')
+        app.unbind('/')
+        app.unbind('*')
+        app.unbind('<BackSpace>')
+
+
+label_resultados.bind('<FocusIn>', desativar_binds)
 
 app.mainloop()
